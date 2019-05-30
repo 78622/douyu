@@ -1,8 +1,6 @@
 (function() {
     'use strict';
 
-    var $h2p_j = jQuery.noConflict();
-
     var bool_barrageReady = false;          // 自动弹幕模块是否装载完毕
     var bool_clearReady = false;            // 自动清理模块是否装载完毕
     var bool_settingReady = false;          // 斗鱼设置模块是否装载完毕
@@ -100,7 +98,7 @@
 
 
         // 整个面板 ===============================================================
-        var div_sendBarrage = $h2p_j('<div id="div-sendBarrage" class="h2p-div-panel"></div>');
+        var div_sendBarrage = $('<div id="div-sendBarrage" class="h2p-div-panel"></div>');
 
         var str_div_speed_and_countDown = (function(){/*
             <div class="h2p-div-layer">
@@ -111,23 +109,23 @@
                 </div>
             </div>
         */}).toString().split('/*')[1].split('*/')[0].replace(/[\n]/g, '');
-        var div_speed_and_countDown = $h2p_j(str_div_speed_and_countDown);
+        var div_speed_and_countDown = $(str_div_speed_and_countDown);
 
         var str_div_loopBarrage = (function(){/*
             <div class="h2p-div-layer" style="height: 98px;">
                 <textarea id="input-loopBarrage-content" class="h2p-textarea-loopBarrage" placeholder="封禁规则：用#隔开（不要使用空格）"></textarea>
             </div>
         */}).toString().split('/*')[1].split('*/')[0].replace(/[\n]/g, '');
-        var div_loopBarrage = $h2p_j(str_div_loopBarrage);
+        var div_loopBarrage = $(str_div_loopBarrage);
 
 
 
-        var div_barrageSendBtn = $h2p_j('<div class="h2p-div-layer"></div>');
+        var div_barrageSendBtn = $('<div class="h2p-div-layer"></div>');
 
         var btn_sendBarrage = document.createElement('button');
-        $h2p_j(btn_sendBarrage).attr('id', 'btn-sendBarrage');
-        $h2p_j(btn_sendBarrage).attr('class', 'h2p-btn-sendBarrage');
-        $h2p_j(btn_sendBarrage).text('确定');
+        $(btn_sendBarrage).attr('id', 'btn-sendBarrage');
+        $(btn_sendBarrage).attr('class', 'h2p-btn-sendBarrage');
+        $(btn_sendBarrage).text('确定');
 
         btn_sendBarrage.onmouseover = function(){
             this.style.background = '#00d1b2';
@@ -135,7 +133,7 @@
         btn_sendBarrage.onmouseout = function(){
             this.style.background = '#00ddbb';
         }
-        $h2p_j(div_barrageSendBtn).append(btn_sendBarrage);
+        $(div_barrageSendBtn).append(btn_sendBarrage);
 
 
         // 分隔线  ===============================================================
@@ -143,18 +141,18 @@
 
 
         // 添加所有元素  ===============================================================
-        $h2p_j(div_sendBarrage).append(div_speed_and_countDown);
-        $h2p_j(div_sendBarrage).append($h2p_j(hr_style));
-        $h2p_j(div_sendBarrage).append(div_loopBarrage);
-        $h2p_j(div_sendBarrage).append($h2p_j(hr_style));
-        $h2p_j(div_sendBarrage).append(div_barrageSendBtn);
+        $(div_sendBarrage).append(div_speed_and_countDown);
+        $(div_sendBarrage).append($(hr_style));
+        $(div_sendBarrage).append(div_loopBarrage);
+        $(div_sendBarrage).append($(hr_style));
+        $(div_sendBarrage).append(div_barrageSendBtn);
 
 
         // 检查弹幕面板挂载点（斗鱼弹幕显示区域）是否加载完成
         var check_mountPoint_barragePanel = setInterval( function(){
-            if( $h2p_j('div.layout-Player-asideMainTop')[0] ){
+            if( $('div.layout-Player-asideMainTop')[0] ){
                 setTimeout( function(){
-                    $h2p_j( $h2p_j('div.layout-Player-asideMainTop')[0] ).append( div_sendBarrage );
+                    $( $('div.layout-Player-asideMainTop')[0] ).append( div_sendBarrage );
                 }, 2000);
                 window.clearInterval( check_mountPoint_barragePanel );
             }
@@ -164,18 +162,18 @@
         // 检查弹幕图标挂载点（斗鱼弹幕输入框）是否加载完成
         var check_mountPoint_barrageIcon = setInterval( function(){
             if( document.getElementById('div-sendBarrage') && document.getElementsByClassName('ChatToolBar')[0] ){
-                let div_sign = $h2p_j('<div class="h2p-div-sign" style="margin: -8px 0 0 -5px;" title="弹幕封禁"></div>');
+                let div_sign = $('<div class="h2p-div-sign" style="margin: -8px 0 0 -5px;" title="弹幕封禁"></div>');
 
-                let btn_sign = $h2p_j('<span id="button-sign" class="h2p-span-sign">✡️</span>');
-                $h2p_j(btn_sign).click(function(){
-                    $h2p_j('div#div-sendBarrage').toggle();
-                    $h2p_j('div#div-DYLight').hide();
-                    $h2p_j('div#div-setting').hide();
+                let btn_sign = $('<span id="button-sign" class="h2p-span-sign">✡️</span>');
+                $(btn_sign).click(function(){
+                    $('div#div-sendBarrage').toggle();
+                    $('div#div-DYLight').hide();
+                    $('div#div-setting').hide();
                 });
 
-                $h2p_j(div_sign).append(btn_sign);
+                $(div_sign).append(btn_sign);
 
-                $h2p_j( $h2p_j('div.ChatToolBar')[0] ).append( div_sign );
+                $(  $('div.ChatToolBar')[0] ).append( div_sign );
                 window.clearInterval( check_mountPoint_barrageIcon );
             }
         }, 1000);
