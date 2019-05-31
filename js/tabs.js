@@ -1,10 +1,9 @@
 (function() {
     'use strict';
-
+	
     var bool_barrageReady = false;          // 自动弹幕模块是否装载完毕
     var bool_clearReady = false;            // 自动清理模块是否装载完毕
     var bool_settingReady = false;          // 斗鱼设置模块是否装载完毕
-
 
     var color_input_on = 'white';
     var color_input_off = '#DCDCDC';
